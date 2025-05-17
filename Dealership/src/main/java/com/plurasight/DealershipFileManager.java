@@ -6,7 +6,7 @@ import java.io.FileWriter;
 
 // a bunch of functions we need , but not object itself
 public class DealershipFileManager {
-    private static final String filePath = "todo"; //Todo: add proper file path
+    private static final String filePath = "src/main/resources/inventory.csv"; //Todo: add proper file path
 
     //Read & Parse Dealership + inventory from file
     public static Dealership getDealership() throws Exception{
@@ -14,6 +14,7 @@ public class DealershipFileManager {
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         Dealership dealership = new Dealership(reader.readLine());
         String line;
+
 
         while((line = reader.readLine()) != null){
             dealership.addVehicle(new Vehicle(line));

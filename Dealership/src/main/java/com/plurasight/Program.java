@@ -14,6 +14,7 @@ public class Program {
         try {
             userInterface.display();
         } catch (Exception e) {
+
             System.out.println("Failed to Save Dealership File!");
             System.exit(1);
         }
