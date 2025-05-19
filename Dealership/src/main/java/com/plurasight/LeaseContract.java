@@ -3,8 +3,8 @@ package com.plurasight;
 public class LeaseContract extends Contract {
     private double expectingEndingValue, leaseFee;
 
-    public LeaseContract(String customerName, String customerEmail, String saleDate, double salePrice, double monthlyPayment, Vehicle vehicle, double expectingEndingValue, double leaseFee) {
-        super(customerName, customerEmail, saleDate, salePrice, monthlyPayment, vehicle);
+    public LeaseContract(String customerName, String customerEmail, String saleDate, double salePrice, Vehicle vehicle) {
+        super(customerName, customerEmail, saleDate, salePrice, vehicle);
         this.expectingEndingValue = salePrice /2;
         this.leaseFee = salePrice *.07;
     }

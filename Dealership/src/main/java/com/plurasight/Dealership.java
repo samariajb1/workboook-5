@@ -33,10 +33,12 @@ private ArrayList<Vehicle> inventory;
         inventory.add(vehicle);
     }
 
-    public void removeVehicle(Vehicle vehicle){
-        inventory.remove(vehicle);
+    public void removeVehicle(int vin){
+         ArrayList<Vehicle>vehiclesThatMatchesTheVin = inventory.stream().filter(vehicle -> vehicle.getVin()==vin).collect(Collectors.toCollection(ArrayList::new));
+          inventory.removeAll(vehiclesThatMatchesTheVin); //the left side of the equals is the variable and the right side is the valuables.
+        //The right side is saying that the variable needs to be streamed and filtered through the vehicles arraylist and to get the vin and then collect the vehicles that match the vin number and insert that into the new array list
+        // The inventory returned is telling the computer to remove all vehicles that match from the inventory list.
     }
-
    public ArrayList<Vehicle> getVehiclesByPrice(float min, float max) {
         return inventory.stream().filter(vehicle -> vehicle.getPrice() > min && vehicle.getPrice() <max).collect(Collectors.toCollection(ArrayList::new));
     }

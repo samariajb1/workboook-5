@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class UserInterface {
 
-    private List<Vehicle> vehicleList = new ArrayList<>();
+
         private Dealership dealership;
         private Scanner scanner;
 
@@ -114,6 +114,7 @@ public class UserInterface {
 
     }
     public void processGetAllVehicleRequest() {
+      ArrayList<Vehicle>vehicleList = dealership.getAllVehicles();
         if (vehicleList.isEmpty()){  // I asked chat -> "for this function how can I add the right display for the user to be able to see all vehilces that i have stored? heres the funcation  public void processGetAllVehicleRequest() {
 // Did it myself and didn't copy
             System.out.print("No Vehicle's Found.");
@@ -122,31 +123,48 @@ public class UserInterface {
             for (Vehicle v : vehicleList){
                 System.out.println(v);
             }
-            dealership.getAllVehicles();// don't feel like this belong
+
         }
 
 
-        dealership.getAllVehicles().forEach(System.out::println);
+
     }
     public void processAddVehicleRequest() {
-        System.out.println("What Vehicle Are We Adding?");
+        System.out.println("What Vehicle is now being added?: ");
+        System.out.print("Enter The Vin: ");
+        int vin = scanner.nextInt();
+        System.out.print("Enter The Odometer: ");
+        float odometer = scanner.nextFloat();
+        System.out.print("Enter The Year: ");
+        int year = scanner.nextInt();
+        System.out.print("Enter The Price: ");
+        float price = scanner.nextFloat();
+        scanner.nextLine();
+        System.out.print("Enter The Make: ");
+        String make = scanner.nextLine();
+        System.out.print("Enter The Model: ");
+        String model = scanner.nextLine();
+        System.out.print("Enter The Vehicle Type: ");
+        String vehicleType = scanner.nextLine();
+        System.out.print("Enter Color: ");
+        String color = scanner.nextLine();
+//TODO: Let the user know that that object inst available
+
+
+        dealership.addVehicle(new Vehicle(vin,odometer,year,price,make,model,vehicleType,color));
+
 
 
 
     }
     public void processRemoveRequest() {
+        System.out.print("Enter The Vin To Remove Vehicle: ");
+        int vin = scanner.nextInt();
+        scanner.nextLine();
 
-    }
-    public void addVehicle(){
-    }
-    public void removeVehicle(){
-    }
-
-    public List<Vehicle> getVehicleList() {
-        return vehicleList;
+        dealership.removeVehicle(vin);
     }
 
-    public void setVehicleList(List<Vehicle> vehicleList) {
-        this.vehicleList = vehicleList;
-    }
+
+
 }

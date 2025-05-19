@@ -2,15 +2,14 @@ package com.plurasight;
 
 public abstract class Contract {
     protected String customerName,customerEmail,saleDate;
-    protected double salePrice, monthlyPayment;
+    protected double salePrice;
     protected Vehicle vehicle;
 
-    public Contract(String customerName, String customerEmail, String saleDate, double salePrice, double monthlyPayment,Vehicle vehicle) {
+    public Contract(String customerName, String customerEmail, String saleDate, double salePrice,Vehicle vehicle) {
         this.customerName = customerName;
         this.customerEmail = customerEmail;
         this.saleDate = saleDate;
         this.salePrice = salePrice;
-        this.monthlyPayment = monthlyPayment;
         this.vehicle = vehicle;
 
 
@@ -48,9 +47,6 @@ public abstract class Contract {
 
     public abstract double getMonthlyPayment();
 
-    public void setMonthlyPayment(double monthlyPayment) {
-        this.monthlyPayment = monthlyPayment;
-    }
 
     public Vehicle getVehicle() {
         return vehicle;
@@ -58,6 +54,29 @@ public abstract class Contract {
 
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
+    }
+    public static Contract parseContract(String parsable) {
+        String[] parts = parsable.split("\\|");
+        String contractType = parts[0];
+        String date = parts[1];
+        String name = parts[2];
+        String email = parts[3];
+        int vin = Integer.parseInt(parts[4]);
+        String make = parts[5];
+        String model = parts[6];
+        String carType = parts[7];
+        String color = parts[8];
+        int year = 0; //TODO: Figure out what part year is!
+        boolean isFinancing = true;// TODO: Figure out what is being financed
+        int odometer = Integer.parseInt(parts[9]);
+        float price = Float.parseFloat(parts[10]);
+        return switch (contractType){
+            case "SALE" -> new SalesContract(name,email,date,price,new Vehicle(vin,odometer,year,price,make,model,carType,color),isFinancing);
+
+            case "LEASE" -> new LeaseContract(name,email,date,price,new Vehicle(vin,odometer,year,price,make,model,carType,color));
+            default -> throw new IllegalStateException("Unexpected value: " + contractType);
+        };
+
     }
 
 }
